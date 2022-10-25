@@ -1,12 +1,13 @@
 .aboutme{
     max-width: 1140px;
-    margin: auto;
+    margin: 0 auto;
+    padding: 90px 70px;
 }
 .aboutme__header{
     font-weight: 400;
     font-size: 22px;
     border-bottom: 1px solid #000;
-    padding: 110px 0 23px;
+    padding-bottom: 23px;
     margin: 0;
 }
 .aboutme__container{
@@ -44,6 +45,8 @@
     margin: 0;
     position: absolute;
     bottom: 0;
+    text-decoration: none;
+    color: #000;
 }
 .aboutme__image{
     width: 270px;

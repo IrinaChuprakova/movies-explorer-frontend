@@ -12,18 +12,15 @@
 
 }
 
-.header__logo {
-    padding-top: 18px;
-}
-
-.nav__signup {
+.header__signup {
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     color: #FFFFFF;
+    text-decoration: none;
 }
 
-.nav__signin {
+.header__signin {
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
@@ -31,6 +28,8 @@
     border-radius: 3px;
     padding: 8px 20px;
     margin-left: 30px;
+    text-decoration: none;
+    color: #000;
 }
 
 @media screen and (max-width: 768px) {
@@ -44,3 +43,4 @@
         max-width: 668px;
     }
 }
+

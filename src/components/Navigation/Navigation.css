@@ -1,0 +1,20 @@
+.link {
+    text-decoration: none;
+    color: #000;
+}
+
+.nav-authorize{
+    min-height: 74px;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.nav-authorize__container{
+    margin-left: 40px;
+}
+.nav-authorize-profile {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: #F9F9F9;
+}

@@ -1,0 +1,27 @@
+.not-found{
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 246px auto 60px;
+padding: 0 10px;
+}
+.not-found__title{
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 169px;
+    margin: 0;
+}
+.not-found__info{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin: 5px 0 0;
+}
+.not-found__link{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FF6838;
+    margin-top: 184px;
+    text-decoration: none;
+}

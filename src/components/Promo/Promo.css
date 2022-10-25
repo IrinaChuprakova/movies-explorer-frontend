@@ -4,9 +4,10 @@
 
 .promo__container {
     max-width: 1140px;
-    min-height: 560px;
     margin: 0 auto;
-    position: relative;
+    padding: 50px 70px 60px;
+    display: flex;
+    flex-direction: column;
 }
 
 .promo__title {
@@ -17,53 +18,37 @@
     color: #FFFFFF;
     max-width: 626px;
     margin: 0;
-    position: absolute;
-    top: 0;
-    padding: 50px 0 0;
 }
 
 .promo__img {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 0 0 60px 0;
+    padding-top: 102px;
+    align-self: flex-end;
 }
 
 @media screen and (max-width: 768px) {
     .promo__container {
-        max-width: 668px;
+        padding: 300px 44px 70px;
     }
     .promo__title {
+        max-width: 680px;
         text-align: center;
-        padding: 300px 0 140px;
-        position: relative;
-        margin: auto;
     }
-
     .promo__img {
-        padding: 0 0 70px 0;
-
-        max-height: 230px;
-        position: relative;
-        margin: auto;
-        display: block;
+        align-self: center;
     }
 }
 
 @media screen and (max-width: 320px) {
     .promo__container {
-        max-width: 300px;
+        padding: 183px 0 40px;
     }
     .promo__title {
         font-size: 31px;
-        line-height: 39px;
-        text-align: center;
-        padding: 193px 0 60px;
+        max-width: 300px;
+        margin: auto;
     }
-
     .promo__img {
-        padding: 0 0 40px 0;
-        max-width: 320px;
-        max-height: 230px;
+        padding-top: 60px;
+        content: url("../../images/promomin.svg");
     }
 }

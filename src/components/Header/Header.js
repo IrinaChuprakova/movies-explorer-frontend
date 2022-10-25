@@ -1,18 +1,22 @@
-// import Navigation from "../Navigation/Navigation";
+import { Link } from 'react-router-dom';
+
 import './Header.css';
-import logo from '../../images/logo.svg';
+import Logo from '../Logo/Logo';
+import Navigation from '../Navigation/Navigation';
 
 function Header(props){
     return(
         <header className="header">
+        
         <div className="header__container">
-        <img src={logo} className="header__logo"/>
-        <nav>
-            <a className="nav__signup">Регистрация</a>
-            <a className="nav__signin">Войти</a>
+        <Logo/>
+        <nav >
+        <Link to="/signup" className="header__signup"> Регистрация</Link>
+        <Link to="/signin" className="header__signin"> Войти</Link>
         </nav>
-            {/* <Navigation /> */}
+        <Navigation/>
         </div>
+
         </header>
     )
 }
