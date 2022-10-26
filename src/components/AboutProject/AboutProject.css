@@ -6,6 +6,8 @@
 
 .project-about__header {
     font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
     border-bottom: 1px solid #000;
     padding-bottom: 23px;
     margin: 0;
@@ -21,18 +23,23 @@
 }
 
 .project-about__title {
-    font-size: 20px;
     margin: 0;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
 }
 
 .project-about__info {
-    font-size: 14px;
     margin: 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 .progressbar {
     display: grid;
-    grid-template-columns:20% 80%;
+    grid-template-columns: 20% 80%;
     row-gap: 14px;
     text-align: center;
 }
@@ -47,12 +54,14 @@
 
 .progressbar__header {
     font-size: 14px;
+    line-height: 17px;
     margin: 0;
-    padding: 9px 0;
+    padding: 9px;
 }
 
 .progressbar__title {
     font-size: 14px;
+    line-height: 17px;
     color: #A0A0A0;
     margin: 0;
 }
@@ -61,18 +70,27 @@
     .project-about {
         padding: 90px 50px;
     }
+
     .project-about__container {
         gap: 22px 30px;
         padding-bottom: 93px;
     }
+
     .project-about__info {
         font-size: 12px;
+        line-height: 18px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 370px) {
     .project-about {
         padding: 70px 18px;
+    }
+
+    .project-about__header {
+        font-size: 18px;
+        line-height: 22px;
+        padding-bottom: 28px;
     }
     .project-about__container {
         padding-top: 60px;
@@ -81,24 +99,35 @@
         padding-top: 60x;
         padding-bottom: 60px;
     }
-    .project-about__header {
-        font-size: 18px;
-    }
+
     .project-about__title {
         padding-bottom: 16px;
         font-size: 18px;
+        line-height: 22px;
     }
+
     .project-about__info {
         font-size: 11px;
+        line-height: 16px;
     }
+
     .project-about__info:first-of-type {
         padding-bottom: 56px;
     }
+
     .progressbar__header {
         font-size: 11px;
+        line-height: 13px;
+        padding: 11px;
     }
-    
+
     .progressbar__title {
         font-size: 11px;
+        line-height: 13px;
+    }
+    
+    .progressbar{
+        grid-template-columns: 100px 184px;
+        row-gap: 10px;
     }
 }

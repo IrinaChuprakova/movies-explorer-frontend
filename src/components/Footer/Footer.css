@@ -34,6 +34,7 @@
 .footer__list{
     list-style-type: none;
     display: flex;
+    gap: 20px;
     padding:0;
     margin: 0;
 }
@@ -45,9 +46,6 @@
     text-align: right;
 }
 
-.footer__list-item:last-child{
-    padding-left: 20px;
-}
 .footer__link{
     text-decoration: none;
     font-weight: 400;
@@ -58,12 +56,30 @@
 
 @media screen and (max-width: 768px) {
     .footer__container {
-        max-width: 668px;
+        padding: 79px 30px 20px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 370px) {
     .footer__container {
-        max-width: 668px;
+        padding: 79px 10px 10px;
+    }
+    .footer__title{
+        max-width: 300px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .footer__box{
+        align-items: center;
+        flex-direction: column-reverse;
+        padding-top: 30px;
+    }
+    .footer__list{
+        flex-direction: column;
+        align-items: center;
+        gap:12px;
+    }
+    .footer__copyright{
+        padding-top: 30px;
     }
 }

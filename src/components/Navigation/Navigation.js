@@ -4,14 +4,16 @@ import Logo from '../Logo/Logo';
 
 function Navigation(loggedIn) {
     return (
-        <>
-        <div>
-        <NavLink to="/movies" className="link">Фильмы</NavLink>
-        <NavLink to="/saved-movies" className="link">Сохранённые фильмы</NavLink>
-        <NavLink to="/profile" className="nav-authorize-profile link"> Аккаунт</NavLink>
-        </div>
 
-        </>           
+        <nav className='nav-authorize-profile'>
+        <div>
+        <NavLink to="/movies" className="nav-authorize-profile__link link">Фильмы</NavLink>
+        <NavLink to="/saved-movies" className="nav-authorize-profile__link link">Сохранённые фильмы</NavLink>
+        </div>
+        <NavLink to="/profile" className="nav-authorize-profile__akkaunt link"> Аккаунт</NavLink>
+        </nav>
+
+       
     )
 
 }

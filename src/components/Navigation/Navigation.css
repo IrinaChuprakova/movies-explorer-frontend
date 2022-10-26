@@ -2,19 +2,26 @@
     text-decoration: none;
     color: #000;
 }
-
-.nav-authorize{
-    min-height: 74px;
-    max-width: 1140px;
-    margin: 0 auto;
+.nav-authorize-profile{
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
-.nav-authorize__container{
-    margin-left: 40px;
+.nav-authorize-profile__link{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
 }
-.nav-authorize-profile {
+
+.nav-authorize-profile__link:last-child{
+    margin-left: 16px;
+}
+
+.nav-authorize-profile__akkaunt{
     padding: 8px 20px;
-    border-radius: 20px;
     background-color: #F9F9F9;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
 }

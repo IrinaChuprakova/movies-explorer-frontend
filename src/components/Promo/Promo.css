@@ -34,21 +34,33 @@
         text-align: center;
     }
     .promo__img {
+        width: 680px;
+        height: 230px;
+        padding-top: 140px;
         align-self: center;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 680px) {
+
+    .promo__img {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 370px) {
     .promo__container {
         padding: 183px 0 40px;
     }
     .promo__title {
         font-size: 31px;
+        line-height: 39px;
         max-width: 300px;
         margin: auto;
     }
     .promo__img {
         padding-top: 60px;
-        content: url("../../images/promomin.svg");
+        object-fit: cover;
     }
 }

@@ -1,15 +1,23 @@
 .header {
     background-color: #465DFF;
+    max-height: 74px;
+}
+
+.header-auth{
+    background-color: #fff;
 }
 
 .header__container {
-    min-height: 74px;
+    padding: 18px 70px;
     max-width: 1140px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 85px 1fr;
     align-items: center;
+}
 
+.header__nav{
+    justify-self: end;
 }
 
 .header__signup {
@@ -34,13 +42,24 @@
 
 @media screen and (max-width: 768px) {
     .header__container  {
-        max-width: 668px;
+        padding: 18px 30px;
+    }
+    .header__signin{
+        margin-left: 50px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 370px) {
     .header__container  {
-        max-width: 668px;
+        padding: 18px 14px;
+    }
+    .header__signup{
+        font-size: 10px;
+    }
+    .header__signin{
+        padding: 5px 12px;
+        font-size: 10px;
+        margin-left: 14px;
     }
 }
 
