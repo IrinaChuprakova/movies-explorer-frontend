@@ -24,24 +24,25 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Header loggedIn={loggedIn} />
+          <Header/>
           <Main/>
           <Footer/>
         </Route>
 
         <Route  path="/movies">
-          <HeaderAuth loggedIn={loggedIn} />
+          <HeaderAuth/>
           <Movies/>
           <Footer/>
         </Route>
 
         <Route  path="/saved-movies">
-          <HeaderAuth loggedIn={loggedIn} />
+          <HeaderAuth/>
           <SavedMovies/>
           <Footer/>
         </Route>
 
         <Route  path="/profile">
+          <HeaderAuth/>
           <Profile/>
         </Route>
 

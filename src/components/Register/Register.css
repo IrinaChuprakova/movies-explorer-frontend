@@ -7,7 +7,7 @@
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
-    margin-top: 40px;
+    margin: 40px 0;
 }
 .register__form {
     width: 100%;
@@ -25,10 +25,13 @@
     border-radius: 8px;
     border: none;
     margin: 10px 0 20px;
-    padding: 15px
+    padding: 15px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
 }
-.register__input:last-child{
-    margin-bottom: 10px;
+.register__input:last-of-type{
+    margin: 10px 0 10px;
 
 }
 .register__error{
@@ -42,14 +45,14 @@
     background: #FF6838;
     border: none;
     border-radius: 3px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 13px;
+    padding-bottom: 15px;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
     color: #FFFFFF;
-    margin-top: 82px;
+    margin-top: 69px;
     cursor: pointer;
 }
 .register__link{
@@ -65,4 +68,29 @@
 
 .register__link_orange{
     color: #FF6838;
+}
+
+@media screen and (max-width: 768px) {
+    .register{
+        margin: 232px auto;
+
+    }
+}
+@media screen and (max-width: 370px) {
+    .register{
+        margin: 56px auto 30px;
+        display: grid;
+        justify-items: center;   
+    }
+    .register__title{
+        margin: 50px 0 80px;
+    }
+    .register__btn{
+        margin-top: 157px;
+    }
+    .register__link{
+        font-size: 12px;
+        line-height: 15px;
+    }
+
 }

@@ -4,6 +4,7 @@ import search from '../../images/search.svg';
 function SearchForm(){
     return(
         <div className="search-form">
+        <div className="search-form__form-box">
         <form className="search-form__form">
         <img src={search}/>
         <input className="search-form__input" type="text" placeholder="Фильм"></input>
@@ -13,6 +14,9 @@ function SearchForm(){
         <span className="search-form__text"> Короткометражки </span>
         </form>
         </div>
+        </div>
+
+
 
     )
 }
