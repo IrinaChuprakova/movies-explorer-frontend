@@ -101,3 +101,27 @@
     padding-bottom: 109px;
   }
 }
+
+@media screen and (max-width: 370px) {
+  .search-form {
+    padding: 80px 10px 50px;
+  }
+  .search-form__border {
+    display: none;
+  }
+  .search-form__input {
+    width: calc(100% - 80px);
+  }
+  .search-form__checkbox{
+    position: absolute;
+    margin-top: 197px;
+    margin-left: 76px;  
+  }
+  .search-form__text{
+    position: absolute;
+    margin-top: 197px;
+    margin-left: 125px;  
+  }
+
+
+}
