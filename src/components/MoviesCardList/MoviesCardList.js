@@ -12,7 +12,7 @@ function MoviesCardList(){
             />))} */}
             <MoviesCard/>
         </ul>
-        <button className="cards__more">Ещё</button>
+        <button className="cards__more" type="button">Ещё</button>
       </div>
     )
 }

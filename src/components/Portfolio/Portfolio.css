@@ -19,15 +19,8 @@
 }
 
 .portfolio__list-item{
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 50px;
-    letter-spacing: -0.04em;
     border-bottom: 1px solid #E8E8E8;
     padding: 20px 0 19px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     cursor: pointer;
 }
 .portfolio__list-item:last-child{
@@ -38,8 +31,17 @@
     padding: 0 0 19px;
 }
 .portfolio__link{
+    display: flex;
+    justify-content: space-between;
     text-decoration: none;
     color: #000;
+}
+.portfolio__link-text{
+    margin: 0;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
 }
 
 @media screen and (max-width: 768px) {

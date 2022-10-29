@@ -13,6 +13,7 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
+import Sidebar from '../Sidebar/Sidebar';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -54,9 +55,16 @@ function App() {
           <Register/>
         </Route>
 
+        {/* <Route path="/h">
+        <Sidebar/>
+        </Route> */}
+
         <Route path="*">
           <NotFound />
         </Route>
+
+
+
 
       </Switch>
 

@@ -12,7 +12,7 @@ function Login(){
         <input className="login__input"></input>
         <label className="login__label">Пароль</label>
         <input className="login__input" type="password" placeholder="Ваш пароль" required></input>
-        <button className="login__btn"> Войти </button>
+        <button className="login__btn" type="button"> Войти </button>
         <Link to="/signup" className="login__link"> Ещё не зарегистрированы? <span className='login__link_orange'> Регистрация </span></Link>
         </form>
         </section>

@@ -14,8 +14,8 @@ function Profile(){
         <label className="profile__label" type="email" placeholder="Ваше e-mail" required>E-mail</label>
         <input className="profile__input"></input>
         </div>
-        <button className="profile__btn-edit"> Редактировать </button>
-        <button className="profile__btn-logout"> Выйти из аккаунта </button>
+        <button className="profile__btn-edit" type="button"> Редактировать </button>
+        <button className="profile__btn-logout" type="button"> Выйти из аккаунта </button>
         </form>
         </section>
     )

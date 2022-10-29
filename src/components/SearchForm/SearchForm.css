@@ -9,7 +9,7 @@
   margin: auto;
   align-items: center;
   max-width: 1140px;
-  background: #F9F9F9;
+  background: #f9f9f9ef;
   border-radius: 9px;
   padding: 19px;
 }
@@ -17,9 +17,12 @@
 .search-form__input {
   border: none;
   background-color: transparent;
-  width: calc(100% - 300px);
+  width: calc(100% - 307px);
   outline: none;
   margin-left: 10px;
+}
+.search-form__input:focus {
+  border-bottom: 1px solid #d0ccccef;
 }
 
 .search-form__btn {
@@ -28,13 +31,16 @@
   border: none;
   background-image: url('../../images/searchbtn.svg');
   background-color: transparent;
-  cursor: pointer;
 }
 
 .search-form__border {
   height: 40px;
   border-left: 1px solid #E8E8E8;
   margin: 0 30px;
+}
+.search-form-container{
+  display: flex;
+  align-items: center;
 }
 
 .search-form__checkbox {
@@ -102,7 +108,10 @@
   }
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (max-width: 550px) {
+  .search-form__form{
+    justify-content: center;
+  }
   .search-form {
     padding: 80px 10px 50px;
   }
@@ -112,16 +121,12 @@
   .search-form__input {
     width: calc(100% - 80px);
   }
-  .search-form__checkbox{
-    position: absolute;
-    margin-top: 197px;
-    margin-left: 76px;  
+  .search-form__form-box {
+    position: relative;
   }
-  .search-form__text{
+  .search-form-container{
     position: absolute;
-    margin-top: 197px;
-    margin-left: 125px;  
+    top:112px
   }
-
 
 }

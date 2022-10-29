@@ -1,65 +1,90 @@
 .header {
-    background-color: #465DFF;
-    max-height: 74px;
+  background-color: #465dff;
+  max-height: 74px;
 }
 
-.header-auth{
-    background-color: #fff;
+.header-auth {
+  background-color: #fff;
 }
 
 .header__container {
-    padding: 18px 70px;
-    max-width: 1140px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 85px 1fr;
-    align-items: center;
-}
-
-.header__nav{
-    justify-self: end;
+  padding: 18px 70px;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  align-items: center;
 }
 
 .header__signup {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    color: #FFFFFF;
-    text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .header__signin {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    background: #2BE080;
-    border-radius: 3px;
-    padding: 8px 20px;
-    margin-left: 30px;
-    text-decoration: none;
-    color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  background: #2be080;
+  border-radius: 3px;
+  padding: 8px 20px;
+  margin-left: 30px;
+  text-decoration: none;
+  color: #000;
 }
 
 @media screen and (max-width: 768px) {
-    .header__container  {
-        padding: 18px 30px;
-    }
-    .header__signin{
-        margin-left: 50px;
-    }
+  .header__container {
+    padding: 18px 30px;
+  }
+
+  .header__signin {
+    margin-left: 50px;
+  }
 }
 
 @media screen and (max-width: 370px) {
-    .header__container  {
-        padding: 18px 14px;
-    }
-    .header__signup{
-        font-size: 10px;
-    }
-    .header__signin{
-        padding: 5px 12px;
-        font-size: 10px;
-        margin-left: 14px;
-    }
+  .header__container {
+    padding: 18px 14px;
+  }
+
+  .header__signup {
+    font-size: 10px;
+  }
+
+  .header__signin {
+    padding: 5px 12px;
+    font-size: 10px;
+    margin-left: 14px;
+  }
 }
 
+.header__menu {
+  border: 0;
+  background-image: url(../../images/menu.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  height: 44px;
+  width: 44px;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+  .header__nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .header__menu {
+    display:block;
+    justify-self: end;
+  }
+
+}

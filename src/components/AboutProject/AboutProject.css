@@ -81,6 +81,21 @@
         line-height: 18px;
     }
 }
+@media screen and (max-width: 500px) {
+    .progressbar{
+        grid-template-columns: 100px calc(100% - 100px);
+    }
+    .progressbar__header {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
+        padding: 11px;
+    }
+    .progressbar__title {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
 
 @media screen and (max-width: 370px) {
     .project-about {
@@ -115,19 +130,7 @@
         padding-bottom: 56px;
     }
 
-    .progressbar__header {
-        font-size: 11px;
-        line-height: 13px;
-        padding: 11px;
-    }
-
-    .progressbar__title {
-        font-size: 11px;
-        line-height: 13px;
-    }
-    
     .progressbar{
-        grid-template-columns: 100px 184px;
         row-gap: 10px;
     }
 }
