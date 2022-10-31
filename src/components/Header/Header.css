@@ -35,6 +35,11 @@
   text-decoration: none;
   color: #000;
 }
+.header__nav{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 
 @media screen and (max-width: 768px) {
   .header__container {
