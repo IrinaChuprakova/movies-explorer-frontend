@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useState, useEffect } from 'react'
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import * as MainApi from '../../utils/MainApi';
 import Header from '../Header/Header';
 import HeaderAuth from '../Header/HeaderAuth';
@@ -15,8 +15,11 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Sidebar from '../Sidebar/Sidebar';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
+
+
   const [isInfoTooltip, setInfoTooltip] = React.useState(false);
 
   const [currentUser, setCurrentUser] = React.useState({});
@@ -42,7 +45,7 @@ function App() {
         if (res) {
           // setInfoTooltip(true);
           // setStatus(true);
-          // history.push("/");
+          history.push("/movies");
           console.log(res)
         }
       })
@@ -60,7 +63,7 @@ function App() {
           localStorage.setItem("token", res.token);
           // setEmail(res.email);
           setEmail(res);
-          setLoggedIn(true);
+          setLoggedIn(true); 
           MainApi
             .getUserInfo()
             .then((profileInfo) => {
@@ -79,34 +82,35 @@ function App() {
       })
       .catch((error) => { console.log(error); })
   }
+  console.log(loggedIn)
+
+  const location = useLocation();
 
   return (
+    
     <CurrentUserContext.Provider value={currentUser}>
-
-
+    
+    { location.pathname === "/signin" || location.pathname === "/signup" || location.pathname === "*"? null: <Header loggedIn={loggedIn}/> }
+    
       <Switch>
         <Route exact path="/">
-          <Header />
           <Main />
-          <Footer />
         </Route>
 
-        <Route path="/movies">
-          <HeaderAuth />
-          <Movies />
-          <Footer />
-        </Route>
+        <ProtectedRoute  path="/movies"
+          loggedIn={loggedIn}
+          component={Movies}
+        />
 
-        <Route path="/saved-movies">
-          <HeaderAuth />
-          <SavedMovies />
-          <Footer />
-        </Route>
+        <ProtectedRoute path="/saved-movies"
+          loggedIn={loggedIn}
+          component={SavedMovies}
+        />
 
-        <Route path="/profile">
-          <HeaderAuth />
-          <Profile />
-        </Route>
+        <Route path="/profile"
+          loggedIn={loggedIn}
+          component={Profile}
+        />
 
         <Route path="/signin">
           <Login onLogin={handleLogin} />
@@ -116,20 +120,13 @@ function App() {
           <Register onRegister={handleRegister} />
         </Route>
 
-        {/* <Route path="/h">
-        <Sidebar/>
-        </Route> */}
-
         <Route path="*">
           <NotFound />
         </Route>
 
-
-
-
       </Switch>
 
-
+      { location.pathname === "/signin" || location.pathname === "/signup" || location.pathname === "*"? null: <Footer /> }
     </CurrentUserContext.Provider>
   )
 }

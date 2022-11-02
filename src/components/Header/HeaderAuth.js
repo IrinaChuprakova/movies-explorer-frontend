@@ -5,7 +5,7 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import Sidebar from '../Sidebar/Sidebar';
 
-function HeaderAuth(loggedIn){
+function HeaderAuth(){
     const [isSidebarOpened, setSidebar] = useState(false);
 
     function toggleSidebar() {
