@@ -24,7 +24,7 @@
     background: #F9F9F9;
     border-radius: 8px;
     border: none;
-    margin: 10px 0 20px;
+    margin: 10px 0 10px;
     padding: 15px;
     font-weight: 400;
     font-size: 13px;
@@ -42,7 +42,6 @@
 
 }
 .register__btn{
-    background: #FF6838;
     border: none;
     border-radius: 3px;
     padding-top: 13px;
@@ -54,6 +53,14 @@
     color: #FFFFFF;
     margin-top: 69px;
     cursor: pointer;
+}
+.register__btn_valid{
+    background: #FF6838;
+}
+
+.register__btn_error-validation{
+    background: #F8F8F8;
+    color: #000;
 }
 .register__link{
     text-decoration: none;

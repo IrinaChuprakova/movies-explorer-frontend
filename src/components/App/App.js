@@ -82,7 +82,7 @@ function App() {
       })
       .catch((error) => { console.log(error); })
   }
-  console.log(loggedIn)
+  // console.log(loggedIn)
 
   const location = useLocation();
 
@@ -107,7 +107,7 @@ function App() {
           component={SavedMovies}
         />
 
-        <Route path="/profile"
+        <ProtectedRoute path="/profile"
           loggedIn={loggedIn}
           component={Profile}
         />
