@@ -41,6 +41,15 @@
     color: #EE3465;
 
 }
+
+.login__error-api {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    color: #FF004C;
+}
+
 .login__btn{
     border: none;
     border-radius: 3px;

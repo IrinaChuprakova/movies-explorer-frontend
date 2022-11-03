@@ -1,12 +1,9 @@
 import React from 'react';
-
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useState, useEffect } from 'react'
-import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import * as MainApi from '../../utils/MainApi';
 import * as MoviesApi from '../../utils/MoviesApi';
 import Header from '../Header/Header';
-import HeaderAuth from '../Header/HeaderAuth';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
@@ -15,20 +12,15 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
-import Sidebar from '../Sidebar/Sidebar';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const location = useLocation();
   const history = useHistory();
 
-  const [isInfoTooltip, setInfoTooltip] = React.useState(false);
-
   const [currentUser, setCurrentUser] = React.useState({});
-
-  const [email, setEmail] = React.useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [status, setStatus] = React.useState(false);
+  const [errorApi, setErrorApi] = React.useState("")
+  const [loggedIn, setLoggedIn] = React.useState(false);
   
 
   React.useEffect(() => {
@@ -45,15 +37,13 @@ function App() {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          // setInfoTooltip(true);
-          // setStatus(true);
-          history.push("/movies");
-          console.log(res)
+          handleLogin(email, password);
         }
       })
-      .catch(() => {
-        // setInfoTooltip(true);
-        // setStatus(false);
+      .catch((error) => {
+        setErrorApi("Что-то пошло не так...");
+        console.log(error);
+        // seterrorApi("Что-то пошло не так..." + error);
       })
   }
 
@@ -63,26 +53,19 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("token", res.token);
-          // setEmail(res.email);
-          setEmail(res);
           setLoggedIn(true); 
           MainApi
             .getUserInfo()
             .then((profileInfo) => {
-              console.log(profileInfo)
-              // setCurrentUser(profileInfo.user);
+              setCurrentUser(profileInfo.user);
             })
             .catch((error) => console.log(error));
-          // MainApi
-          //   .getInitialCards()
-          //   .then((cards) => {
-          //     setCards(cards.card);
-          //   })
-          //   .catch((error) => console.log(error));
-          history.push("/");
+            history.push("/movies");
         }
       })
-      .catch((error) => { console.log(error); })
+      .catch((error) => { 
+        setErrorApi("Что-то пошло не так...");
+        console.log(error); })
   }
 
   function Search(movie){
@@ -90,8 +73,7 @@ function App() {
     .getMovie(movie)
     .then((res) => {
       const findMovie = res.find(item => item.nameRU.trim().toLowerCase() === movie.toLowerCase())
-      localStorage.setItem("findMovie", JSON.stringify(movie))
-      console.log(JSON.parse(localStorage.getItem("movie")));
+      console.log(findMovie);
     })
     // .then((movie) => {
     //   localStorage.setItem("movie", JSON.stringify(movie))
@@ -130,11 +112,11 @@ function App() {
         />
 
         <Route path="/signin">
-          <Login onLogin={handleLogin} />
+          <Login onLogin={handleLogin} errorApi={errorApi} />
         </Route>
 
         <Route path="/signup">
-          <Register onRegister={handleRegister} />
+          <Register onRegister={handleRegister} errorApi={errorApi}/>
         </Route>
 
         <Route path="*">

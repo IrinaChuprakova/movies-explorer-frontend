@@ -26,6 +26,7 @@ function Login(props){
         <label className="login__label">Пароль</label>
         <input className="login__input" type="password" placeholder="Ваш пароль" name="password" value={values.password || ""} onChange={handleChange}  minLength="2" maxLength="30" required></input>
         <span className="login__error"> {errors.password} </span>
+        <span className="login__error-api">{props.errorApi}</span>
         <button className={isValid ? "login__btn login__btn_valid" : "login__btn login__btn_error-validation"} disabled={!isValid} type="submit"> Войти </button>
         <Link to="/signup" className="login__link"> Ещё не зарегистрированы? <span className='login__link_orange'> Регистрация </span></Link>
         </form>

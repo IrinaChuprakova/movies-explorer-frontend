@@ -26,8 +26,9 @@ function Register(props){
         <label className="register__label">Пароль</label>
         <input className="register__input" type="password" placeholder="Придумайте пароль" name="password" value={values.password || ""} onChange={handleChange} minLength="2" maxLength="30" required></input>
         <span className="register__error"> {errors.password} </span>
+        <span className="register__error-api">{props.errorApi}</span>
         <button className={isValid ? "register__btn register__btn_valid" : "register__btn register__btn_error-validation"} disabled={!isValid} type="submit"> Зарегистрироваться </button>
-        <Link to="/signin" className="register__link">Уже зарегестрированы? <span className='register__link_orange'> Войти </span></Link>
+        <Link to="/signin" className="register__link"> Уже зарегестрированы? <span className='register__link_orange'> Войти </span></Link>
         </form>
         </section>
     )
