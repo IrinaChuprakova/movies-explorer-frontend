@@ -1,5 +1,6 @@
-export const BASE_URL = 'https://diplom.nomoredomains.icu/api';
+const BASE_URL = 'https://diplom.nomoredomains.icu/api';
 
+//статус запроса
 function checkStatus(res){
   if (res.ok){
     return res.json();
@@ -9,6 +10,7 @@ function checkStatus(res){
   }
 };
 
+//заголовок для авторизованного пользователя
 function getHeaders(){
   return {
     'Authorization': `Bearer ${localStorage.getItem("token")}`,
@@ -16,7 +18,7 @@ function getHeaders(){
   }
  };
 
-
+//создаёт пользователя с переданными в теле name, email, password
 export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -29,6 +31,7 @@ export const register = (name, email, password) => {
     .then(checkStatus)
 };
 
+//проверяет переданные в теле почту и пароль и возвращает токен
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
@@ -42,6 +45,7 @@ export const authorize = (email, password) => {
     .then(checkStatus)
 };
 
+//возвращает информацию о пользователе name, emai
 export const  getUserInfo = () => {
   return fetch(`${BASE_URL}/users/me`,{
     method: 'GET',
@@ -50,54 +54,40 @@ export const  getUserInfo = () => {
   .then(checkStatus)
 }
 
-////////////////////////////////////////
-// updateAvatar(link){
-//     const cardsUrl = `${this._baseUrl}/users/me/avatar `;
-//     return fetch(cardsUrl,{
-//       method: 'PATCH',
-//       headers: getHeaders(),
-//       body: JSON.stringify({avatar:link})
-//     })
-//     .then(this._checkStatus);
-//   }
+//обновляет информацию о пользователе name, emai
+export const updateUserInfo = (name, email) =>{
+  return fetch(`${BASE_URL}/users/me`,{
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify({name, email})
+  })
+  .then(checkStatus)
+}
 
-//   getUserInfo() {
-//     const cardsUrl = `${this._baseUrl}/users/me`;
-//     return fetch(cardsUrl,{
-//       headers: getHeaders()
-//     })
-//     .then(this._checkStatus);
-//   }
+//возвращает все сохранённые текущим  пользователем фильмы
+  export const getInitialMovie= () => {
+    return fetch(`${BASE_URL}/movies`,{
+      method: 'GET',
+      headers: getHeaders()
+    })
+    .then(checkStatus);
+  }
 
-//   getInitialCards() {
-//     const cardsUrl = `${this._baseUrl}/cards`;
-//     return fetch(cardsUrl,{
-//       headers: getHeaders()
-//     })
-//     .then(this._checkStatus);
-//   }
+//создаёт фильм с переданными в теле country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId 
+export const createMovie = (country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId) =>{
+  return fetch(`${BASE_URL}/movies`,{
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({})
+    })
+    .then(checkStatus);
+  }
 
-//   sendCard(name,link){
-//     const cardsUrl = `${this._baseUrl}/cards`;
-//     return fetch(cardsUrl,{
-//       method: 'POST',
-//       headers: getHeaders(),
-//       body: JSON.stringify({
-//         name: name,
-//         link: link
-//       })
-//     })
-//     .then(this._checkStatus);
-//   }
-
-
-//   removeCard(cardId){
-//     const cardsUrl = `${this._baseUrl}/cards/${cardId}`;
-//     return fetch(cardsUrl,{
-//       method: 'DELETE',
-//       headers: getHeaders()
-//     })
-//     .then(this._checkStatus);
-//   }
-  
-
+//удаляет сохранённый фильм по id
+export const removeMovie = (movieId) =>{
+  return fetch(`${BASE_URL}/movies/${movieId}`,{
+      method: 'DELETE',
+      headers: getHeaders()
+    })
+    .then(checkStatus);
+  }

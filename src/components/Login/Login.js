@@ -1,26 +1,18 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import  FormValidate from "../FormValidate/FormValidate";
 import './Login.css';
 import Logo from '../Logo/Logo';
 
 function Login(props){
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
 
-    function handleEmail(evt) {
-        setEmail(evt.target.value)
-    }
-
-    function handlePassword(evt) {
-        setPassword(evt.target.value)
-    }
-
+    const {values, handleChange, errors, isValid, resetForm} = FormValidate();
     function handleSubmit(evt) {
         evt.preventDefault();
-        if (!email || !password) {
+        if (!values.email || !values.password) {
             return
         }
-        props.onLogin(email, password);
+        props.onLogin(values.email, values.password);
     }
 
     return(
@@ -29,10 +21,12 @@ function Login(props){
         <h1 className="login__title"> Рады видеть! </h1>
         <form className="login__form" onSubmit={handleSubmit}>
         <label className="login__label">E-mail</label>
-        <input className="login__input" type="email" value={email} onChange={handleEmail} placeholder="Ваше e-mail" required></input>
+        <input className="login__input" type="email" placeholder="Ваше e-mail" name="email" value={values.email || ""} onChange={handleChange}  required></input>
+        <span className="login__error"> {errors.email} </span>
         <label className="login__label">Пароль</label>
-        <input className="login__input" type="password" value={password} onChange={handlePassword} placeholder="Ваш пароль" required></input>
-        <button className="login__btn" type="submit"> Войти </button>
+        <input className="login__input" type="password" placeholder="Ваш пароль" name="password" value={values.password || ""} onChange={handleChange}  minLength="2" maxLength="30" required></input>
+        <span className="login__error"> {errors.password} </span>
+        <button className={isValid ? "login__btn login__btn_valid" : "login__btn login__btn_error-validation"} disabled={!isValid} type="submit"> Войти </button>
         <Link to="/signup" className="login__link"> Ещё не зарегистрированы? <span className='login__link_orange'> Регистрация </span></Link>
         </form>
         </section>

@@ -1,11 +1,13 @@
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css'
-function Movies(){
+function Movies(props){
     return(
         <div className="movies">
-        <SearchForm/>
-        <MoviesCardList/>
+        <SearchForm search={props.search}/>
+        <MoviesCardList
+            
+        />
         </div>
 
     )

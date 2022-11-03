@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useState, useEffect } from 'react'
 import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import * as MainApi from '../../utils/MainApi';
+import * as MoviesApi from '../../utils/MoviesApi';
 import Header from '../Header/Header';
 import HeaderAuth from '../Header/HeaderAuth';
 import Main from '../Main/Main';
@@ -18,7 +19,8 @@ import Sidebar from '../Sidebar/Sidebar';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
-
+  const location = useLocation();
+  const history = useHistory();
 
   const [isInfoTooltip, setInfoTooltip] = React.useState(false);
 
@@ -27,7 +29,7 @@ function App() {
   const [email, setEmail] = React.useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [status, setStatus] = React.useState(false);
-  const history = useHistory();
+  
 
   React.useEffect(() => {
     MainApi
@@ -82,9 +84,22 @@ function App() {
       })
       .catch((error) => { console.log(error); })
   }
-  // console.log(loggedIn)
 
-  const location = useLocation();
+  function Search(movie){
+    MoviesApi
+    .getMovie(movie)
+    .then((res) => {
+      const findMovie = res.find(item => item.nameRU.trim().toLowerCase() === movie.toLowerCase())
+      localStorage.setItem("findMovie", JSON.stringify(movie))
+      console.log(JSON.parse(localStorage.getItem("movie")));
+    })
+    // .then((movie) => {
+    //   localStorage.setItem("movie", JSON.stringify(movie))
+    //   console.log(JSON.parse(localStorage.getItem("movie")));
+    // })
+    .catch((error) => { console.log(error); })
+  }
+
 
   return (
     
@@ -100,11 +115,13 @@ function App() {
         <ProtectedRoute  path="/movies"
           loggedIn={loggedIn}
           component={Movies}
+          search={Search}
         />
 
         <ProtectedRoute path="/saved-movies"
           loggedIn={loggedIn}
           component={SavedMovies}
+          
         />
 
         <ProtectedRoute path="/profile"
