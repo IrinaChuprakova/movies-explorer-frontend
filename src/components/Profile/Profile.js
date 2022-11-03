@@ -3,7 +3,7 @@ import React from "react";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import  FormValidate from "../FormValidate/FormValidate";
 
-function Profile(){
+function Profile(props){
     const {values, handleChange, errors, isValid, resetForm} = FormValidate();
     const currentUser = React.useContext(CurrentUserContext);
     values.name = currentUser.name;
@@ -23,7 +23,7 @@ function Profile(){
         </div>
         <span className="login__error"> {errors.email} </span>
         <button className="profile__btn-edit" type="button"> Редактировать </button>
-        <button className="profile__btn-logout" type="button"> Выйти из аккаунта </button>
+        <button className="profile__btn-logout" type="button" onClick={props.onLogOut}> Выйти из аккаунта </button>
         </form>
         </section>
     )

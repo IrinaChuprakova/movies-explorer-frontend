@@ -11,12 +11,20 @@ function checkStatus(res){
 };
 
 //заголовок для авторизованного пользователя
-function getHeaders(){
+function getHeaders(token){
   return {
-    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+    'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   }
  };
+
+ export const getContent = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: getHeaders(token)
+  })
+    .then(checkStatus)
+}; 
 
 //создаёт пользователя с переданными в теле name, email, password
 export const register = (name, email, password) => {
@@ -49,7 +57,7 @@ export const authorize = (email, password) => {
 export const  getUserInfo = () => {
   return fetch(`${BASE_URL}/users/me`,{
     method: 'GET',
-    headers: getHeaders(),
+    headers: getHeaders(localStorage.getItem("token")),
   })
   .then(checkStatus)
 }
@@ -58,7 +66,7 @@ export const  getUserInfo = () => {
 export const updateUserInfo = (name, email) =>{
   return fetch(`${BASE_URL}/users/me`,{
     method: 'PATCH',
-    headers: getHeaders(),
+    headers: getHeaders(localStorage.getItem("token")),
     body: JSON.stringify({name, email})
   })
   .then(checkStatus)
@@ -68,7 +76,7 @@ export const updateUserInfo = (name, email) =>{
   export const getInitialMovie= () => {
     return fetch(`${BASE_URL}/movies`,{
       method: 'GET',
-      headers: getHeaders()
+      headers: getHeaders(localStorage.getItem("token"))
     })
     .then(checkStatus);
   }
@@ -77,7 +85,7 @@ export const updateUserInfo = (name, email) =>{
 export const createMovie = (country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId) =>{
   return fetch(`${BASE_URL}/movies`,{
       method: 'POST',
-      headers: getHeaders(),
+      headers: getHeaders(localStorage.getItem("token")),
       body: JSON.stringify({})
     })
     .then(checkStatus);
@@ -87,7 +95,7 @@ export const createMovie = (country, director, duration, year, description, imag
 export const removeMovie = (movieId) =>{
   return fetch(`${BASE_URL}/movies/${movieId}`,{
       method: 'DELETE',
-      headers: getHeaders()
+      headers: getHeaders(localStorage.getItem("token"))
     })
     .then(checkStatus);
   }
