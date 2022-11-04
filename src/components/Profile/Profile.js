@@ -4,26 +4,48 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import  FormValidate from "../FormValidate/FormValidate";
 
 function Profile(props){
-    const {values, handleChange, errors, isValid, resetForm} = FormValidate();
+    const {values, setValues, handleChange, errors, isValid, resetForm} = FormValidate();
     const currentUser = React.useContext(CurrentUserContext);
-    values.name = currentUser.name;
-    values.email = currentUser.email;
+    const [show, setShow] = React.useState(true);
+
+    React.useEffect(() => {
+        setValues(currentUser)
+      }, [currentUser])
+    
+    
+    function handleSubmit(evt){
+        evt.preventDefault();
+        props.onUpdate(values.name,values.email)
+        setShow(true)
+    }
+
+    function shows() {
+        setShow(false)
+    }
+
     return(
         <section className="profile">
         <h1 className="profile__title"> Привет,{currentUser.name} </h1>
-        <form className="profile__form">
+        <form className="profile__form" onSubmit={handleSubmit}>
         <div className="profile__container">
-        <label className="profile__label" type="text" placeholder="Ваше имя" name="name" value={values.name || ""} pattern="[а-яА-ЯёЁa-zA-Z-\s]+" minLength="2" maxLength="30" required>Имя</label>
-        <input className="profile__input" value={values.name || ""} onChange={handleChange}></input>
+        <label className="profile__label">Имя</label>
+        <input className="profile__input" type="text" name="name" value={values.name || ""} onChange={handleChange} pattern="[а-яА-ЯёЁa-zA-Z-\s]+" minLength="2" maxLength="30" required></input>
         </div>
-        <span className="login__error"> {errors.name} </span>
+        <span className="profile__error"> {errors.name} </span>
         <div className="profile__container">
-        <label className="profile__label" type="email" placeholder="Ваше e-mail" name="email" value={values.email || ""} minLength="2" maxLength="30" required>E-mail</label>
-        <input className="profile__input" value={values.email || ""} onChange={handleChange}></input>
+        <label className="profile__label">E-mail</label>
+        <input className="profile__input" type="email" name="email" value={values.email || ""} onChange={handleChange}  minLength="2" maxLength="30" required></input>
         </div>
-        <span className="login__error"> {errors.email} </span>
-        <button className="profile__btn-edit" type="button"> Редактировать </button>
+        <span className="profile__error"> {errors.email} </span>
+        { show ? 
+        (<>
+        <button className="profile__btn-edit" type="button" onClick={shows}> Редактировать </button>
         <button className="profile__btn-logout" type="button" onClick={props.onLogOut}> Выйти из аккаунта </button>
+        </>) :
+        (<>
+        <span className="profile__error"> {props.errorApi} </span>
+        <button className={isValid ? "profile__btn profile__btn_valid" : "profile__btn profile__btn_error-validation"} disabled={!isValid} type="submit"> Сохранить </button>
+        </>)}
         </form>
         </section>
     )

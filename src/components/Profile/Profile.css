@@ -39,6 +39,14 @@
     outline:none;
     text-align: end;
 }
+
+.profile__error{
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+}
+
 .profile__btn-edit{
     margin-top: 204px;
     background-color: transparent;
@@ -47,6 +55,30 @@
     font-size: 13px;
     line-height: 16px;
     cursor: pointer;
+    color: #000;
+}
+
+.profile__btn {
+    border: none;
+    border-radius: 3px;
+    padding-top: 13px;
+    padding-bottom: 15px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 69px;
+}
+
+.profile__btn_valid {
+    background: #FF6838;
+    color: #FFFFFF;
+}
+
+.rprofile__btn_error-validation {
+    background: #F8F8F8;
+    color: #000;
 }
 
 .profile__btn-logout{

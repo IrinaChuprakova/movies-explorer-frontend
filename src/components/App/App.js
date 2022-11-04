@@ -67,6 +67,17 @@ function App() {
       });
   }
 
+  function handleUpdate(name,email){
+    MainApi.updateUserInfo(name,email)
+      .then((res) => {
+        setCurrentUser(res.user);
+      })
+      .catch((error) => {
+        setErrorApi("Что-то пошло не так...");
+        console.log(error);
+      });
+  }
+
   function Search(movie) {
     MoviesApi.getMovie(movie)
       .then((res) => {
@@ -138,6 +149,8 @@ function App() {
           loggedIn={loggedIn}
           component={Profile}
           onLogOut={handleLogOut}
+          onUpdate={handleUpdate}
+          errorApi={errorApi}
         />
 
         <Route path="/signin">
@@ -155,6 +168,7 @@ function App() {
 
       {location.pathname === "/signin" ||
         location.pathname === "/signup" ||
+        location.pathname === "/profile" ||
         location.pathname === "*" ? null : (
         <Footer />
       )}
