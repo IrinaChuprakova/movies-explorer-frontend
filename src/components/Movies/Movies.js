@@ -6,7 +6,9 @@ function Movies(props){
         <div className="movies">
         <SearchForm search={props.search}/>
         <MoviesCardList
-            
+            cards={props.cards}
+            // onCardSave={props.onCardSave}
+            // onCardDelete={props.onCardDelete}  
         />
         </div>
 

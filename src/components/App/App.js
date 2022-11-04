@@ -3,6 +3,7 @@ import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as MainApi from "../../utils/MainApi";
 import * as MoviesApi from "../../utils/MoviesApi";
+import * as MovieStorage from "../../utils/MovieStorage";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -21,6 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [errorApi, setErrorApi] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     tokenCheck();
@@ -32,7 +34,7 @@ function App() {
         setCurrentUser(profileInfo.user);
       })
       .catch((error) => console.log(error));
-    }, []);
+  }, []);
 
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
@@ -67,8 +69,8 @@ function App() {
       });
   }
 
-  function handleUpdate(name,email){
-    MainApi.updateUserInfo(name,email)
+  function handleUpdate(name, email) {
+    MainApi.updateUserInfo(name, email)
       .then((res) => {
         setCurrentUser(res.user);
       })
@@ -79,21 +81,20 @@ function App() {
   }
 
   function Search(movie) {
-    MoviesApi.getMovie(movie)
+    MoviesApi.getMovies(movie)
       .then((res) => {
-        const findMovie = res.find(
-          (item) => item.nameRU.trim().toLowerCase() === movie.toLowerCase()
-        );
-        console.log(findMovie);
+        const movies = res.filter((item) => item.nameRU.trim().toLowerCase().includes(movie.toLowerCase()));
+        MovieStorage.setMovies(movies);
+        setCards(movies);
       })
-      // .then((movie) => {
-      //   localStorage.setItem("movie", JSON.stringify(movie))
-      //   console.log(JSON.parse(localStorage.getItem("movie")));
-      // })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  function handleCardSave() {}
+
+  function handleCardDelete() {}
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
@@ -105,24 +106,24 @@ function App() {
         })
         .catch((error) => {
           if (404) {
-            localStorage.removeItem('token');
+            localStorage.removeItem("token");
           }
           console.log(error);
         });
     }
   }
-  
-  function handleLogOut(){
-    localStorage.removeItem('token');
+
+  function handleLogOut() {
+    localStorage.removeItem("token");
     setLoggedIn(false);
-    history.push('/signin');
+    history.push("/signin");
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {location.pathname === "/signin" ||
-        location.pathname === "/signup" ||
-        location.pathname === "*" ? null : (
+      location.pathname === "/signup" ||
+      location.pathname === "*" ? null : (
         <Header loggedIn={loggedIn} />
       )}
 
@@ -136,6 +137,9 @@ function App() {
           loggedIn={loggedIn}
           component={Movies}
           search={Search}
+          onCardSave={handleCardSave}
+          onCardDelete={handleCardDelete}
+          cards={cards}
         />
 
         <ProtectedRoute
@@ -167,9 +171,9 @@ function App() {
       </Switch>
 
       {location.pathname === "/signin" ||
-        location.pathname === "/signup" ||
-        location.pathname === "/profile" ||
-        location.pathname === "*" ? null : (
+      location.pathname === "/signup" ||
+      location.pathname === "/profile" ||
+      location.pathname === "*" ? null : (
         <Footer />
       )}
     </CurrentUserContext.Provider>
