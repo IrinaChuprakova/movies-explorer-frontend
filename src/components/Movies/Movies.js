@@ -7,6 +7,7 @@ function Movies(props){
         <SearchForm search={props.search}/>
         <MoviesCardList
             cards={props.cards}
+            loadMore={props.loadMore}
             // onCardSave={props.onCardSave}
             // onCardDelete={props.onCardDelete}  
         />

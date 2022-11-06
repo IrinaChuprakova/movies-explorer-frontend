@@ -2,6 +2,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 function MoviesCardList(props){
+
     return(
         <div className="cards">
         <ul className="cards__list">
@@ -13,7 +14,7 @@ function MoviesCardList(props){
               // onCardDelete={props.onCardDelete}
             />))}
         </ul>
-        <button className="cards__more" type="button">Ещё</button>
+        <button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>
       </div>
     )
 }
