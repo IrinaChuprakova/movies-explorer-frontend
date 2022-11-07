@@ -82,11 +82,23 @@ export const updateUserInfo = (name, email) =>{
   }
 
 //создаёт фильм с переданными в теле country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId 
-export const createMovie = (country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId) =>{
+export const createMovie = (movie) =>{
   return fetch(`${BASE_URL}/movies`,{
       method: 'POST',
       headers: getHeaders(localStorage.getItem("token")),
-      body: JSON.stringify({})
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+        thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+      })
     })
     .then(checkStatus);
   }
