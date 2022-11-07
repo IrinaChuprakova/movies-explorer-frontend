@@ -23,9 +23,10 @@ function App() {
   const [errorApi, setErrorApi] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [cards, setCards] = React.useState([]);
-
+  const [saveMovie,setSaveMovie] = React.useState([]);
   const [width, setWidth] = React.useState(window.innerWidth);
-  const [more, setMore] = React.useState(0)
+  const [more, setMore] = React.useState(0);
+  const [checked, setChecked] = React.useState(false);
 
   React.useEffect(() => {
     tokenCheck();
@@ -41,13 +42,13 @@ function App() {
 
   React.useEffect(() => {
     window.addEventListener('resize', checkWidth);
-    resizeCards();
+    resizeCards(checked);
   }, [width])
 
   function checkWidth(){
     setWidth(window.innerWidth)
   }
-  
+ 
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
       .then((res) => {
@@ -97,37 +98,42 @@ function App() {
       .then((res) => {
         const movies = res.filter((item) => item.nameRU.trim().toLowerCase().includes(movie.toLowerCase()));
         MovieStorage.setMovies(movies);
-        resizeCards();
+        resizeCards(checked);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  function resizeCards() {
+  function resizeCards(checked) {
+    const movies = checked
+        ? MovieStorage.getMovies().filter(item => item.duration <= 40)
+        : MovieStorage.getMovies();
+
     if (width>768) {
-      setCards(MovieStorage.getMovies().slice(0, 12));
+      setCards(movies.slice(0, 12));
       setMore(4);
       return;
     }
     
-    if (width<=768 && width>480){
-      setCards(MovieStorage.getMovies().slice(0, 8));
+    if (width<=768 && width>480) {
+      setCards(movies.slice(0, 8));
       setMore(2);
       return;
     }
 
-    setCards(MovieStorage.getMovies().slice(0, 5));
+    setCards(movies.slice(0, 5));
     setMore(2);
+  }
+
+  function handleCheckbox(evt) {
+    setChecked(evt.target.checked);
+    resizeCards(evt.target.checked);
   }
 
   function loadMore() {
     setCards(MovieStorage.getMovies().slice(0, cards.length + more));
   }
-
-  function handleCardSave() {}
-
-  function handleCardDelete() {}
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
@@ -171,9 +177,12 @@ function App() {
           component={Movies}
           search={Search}
           cards={cards}
-          onCardSave={handleCardSave}
-          onCardDelete={handleCardDelete}
+          saveMovie={saveMovie}
+          setSaveMovie={setSaveMovie}
           loadMore={loadMore}
+          setCards={setCards}
+          handleCheckbox={handleCheckbox}
+          checked={checked}
         />
 
         <ProtectedRoute

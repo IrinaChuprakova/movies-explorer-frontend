@@ -8,10 +8,11 @@ function MoviesCardList(props){
         <ul className="cards__list">
         {props.cards.map((card) => (
             <MoviesCard
-              // key={}
+              key={card.id}
               card={card}
-              // onCardSave={props.onCardSave}
-              // onCardDelete={props.onCardDelete}
+              onCardSave={props.onCardSave}
+              saveMovie={props.saveMovie}
+              setSaveMovie={props.setSaveMovie}
             />))}
         </ul>
         <button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>

@@ -29,7 +29,7 @@ function SearchForm(props){
         <button className="search-form__btn" type="submit"></button>
         <div className="search-form-container">
         <span className="search-form__border"></span>
-        <input className="search-form__checkbox" type="checkbox"></input>
+        <input className="search-form__checkbox" checked={props.checked} onChange={props.handleCheckbox} type="checkbox"></input>
         <span className="search-form__text"> Короткометражки </span>
         </div>
         </form>

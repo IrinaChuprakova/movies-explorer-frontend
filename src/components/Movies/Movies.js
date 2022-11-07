@@ -4,12 +4,19 @@ import './Movies.css'
 function Movies(props){
     return(
         <div className="movies">
-        <SearchForm search={props.search}/>
+        <SearchForm 
+            search={props.search}
+            handleCheckbox={props.handleCheckbox}
+            setCards={props.setCards}
+            checked={props.checked}
+        />
         <MoviesCardList
             cards={props.cards}
             loadMore={props.loadMore}
-            // onCardSave={props.onCardSave}
-            // onCardDelete={props.onCardDelete}  
+            saveMovie={props.saveMovie}
+            setSaveMovie={props.setSaveMovie}
+            
+            
         />
         </div>
 
