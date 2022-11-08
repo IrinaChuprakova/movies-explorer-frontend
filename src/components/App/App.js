@@ -151,7 +151,7 @@ function App() {
       MainApi.getContent(token)
         .then((res) => {
           setLoggedIn(true);
-          history.push("/");
+          history.push(location.pathname);
         })
         .catch((error) => {
           if (404) {
