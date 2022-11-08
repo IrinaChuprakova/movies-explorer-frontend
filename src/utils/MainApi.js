@@ -73,7 +73,7 @@ export const updateUserInfo = (name, email) =>{
 }
 
 //возвращает все сохранённые текущим  пользователем фильмы
-  export const getInitialMovie= () => {
+  export const getSavedMovies = () => {
     return fetch(`${BASE_URL}/movies`,{
       method: 'GET',
       headers: getHeaders(localStorage.getItem("token"))
@@ -82,7 +82,7 @@ export const updateUserInfo = (name, email) =>{
   }
 
 //создаёт фильм с переданными в теле country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId 
-export const createMovie = (movie) =>{
+export const createMovie = (movie) => {
   return fetch(`${BASE_URL}/movies`,{
       method: 'POST',
       headers: getHeaders(localStorage.getItem("token")),

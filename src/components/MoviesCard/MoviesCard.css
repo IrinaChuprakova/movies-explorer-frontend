@@ -44,10 +44,13 @@
 }
 
 .movie__button_delete{
+    width: 16px;
+    height: 16px;
     background-image: url(../../images/close.svg);
     background-color: transparent;
     background-size: cover;
     border: none;
+    cursor: pointer;
 }
 
 .movie__duration{

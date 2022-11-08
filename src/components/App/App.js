@@ -23,10 +23,17 @@ function App() {
   const [errorApi, setErrorApi] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [cards, setCards] = React.useState([]);
-  const [saveMovie,setSaveMovie] = React.useState([]);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [more, setMore] = React.useState(0);
   const [checked, setChecked] = React.useState(false);
+
+  React.useEffect(() => {
+    MainApi.getSavedMovies()
+      .then(res => {
+        MovieStorage.setSavedMovies(res.movie);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   React.useEffect(() => {
     tokenCheck();
@@ -177,8 +184,6 @@ function App() {
           component={Movies}
           search={Search}
           cards={cards}
-          saveMovie={saveMovie}
-          setSaveMovie={setSaveMovie}
           loadMore={loadMore}
           setCards={setCards}
           handleCheckbox={handleCheckbox}

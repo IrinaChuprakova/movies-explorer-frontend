@@ -13,10 +13,6 @@ function Movies(props){
         <MoviesCardList
             cards={props.cards}
             loadMore={props.loadMore}
-            saveMovie={props.saveMovie}
-            setSaveMovie={props.setSaveMovie}
-            
-            
         />
         </div>
 
