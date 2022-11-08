@@ -163,6 +163,7 @@ function App() {
     localStorage.removeItem("token");
     setLoggedIn(false);
     history.push("/signin");
+    localStorage.clear();
   }
 
   return (
@@ -194,6 +195,7 @@ function App() {
           path="/saved-movies"
           loggedIn={loggedIn}
           component={SavedMovies}
+          cards={MovieStorage.getSavedMovies()}
         />
 
         <ProtectedRoute

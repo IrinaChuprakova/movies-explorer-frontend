@@ -22,7 +22,7 @@ function MoviesCard(props) {
     MainApi.createMovie(props.card)
       .then((res) => {
       console.log('laik')
-      MovieStorage.addSavedMovie(res);
+      MovieStorage.addSavedMovie(res.movie);
       setIsLiked(true)
       })
       .catch((error) => {
@@ -31,25 +31,24 @@ function MoviesCard(props) {
   }
 
   function handleCardDelete() {
-    MainApi.removeMovie(MovieStorage.getSavedMovies().find(movie => movie.movieId === props.card.id)._id)
+    MainApi.removeMovie(MovieStorage.getSavedMovies().find(movie => movie.movieId === props.card.movieId)._id)
     .then((res) => {
      console.log('dislaik')
-     MovieStorage.removeFromSavedMovies(props.card.id);
+     MovieStorage.removeFromSavedMovies(props.card.movieId);
      setIsLiked(false)
+     if (location.pathname === "/saved-movies") {
+      props.setCards(MovieStorage.getSavedMovies());
+     }
     })
      .catch((error) => {
        console.log(error);
      });
   }
 
-  const imageUrl = props.card._id
-    ? props.card.image
-    : `https://api.nomoreparties.co${props.card.image.url}`;
-
   return (
       <li className="movie">
       <a target="blank" href={props.card.trailerLink}>     
-      <img src={imageUrl} className="movie__img" alt="Постер к фильму"/>
+      <img src={props.card.image} className="movie__img" alt="Постер к фильму"/>
       </a>
         <div className="movie__box">
           <h2 className="movie__name">{props.card.nameRU}</h2>         

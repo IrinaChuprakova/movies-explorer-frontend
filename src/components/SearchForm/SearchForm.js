@@ -33,7 +33,7 @@ function SearchForm(props){
         <span className="search-form__text"> Короткометражки </span>
         </div>
         </form>
-        <span>{error}</span>
+        <span className="search-form__error">{error}</span>
         </div>
         </div>
 

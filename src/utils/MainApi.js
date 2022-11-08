@@ -86,19 +86,7 @@ export const createMovie = (movie) => {
   return fetch(`${BASE_URL}/movies`,{
       method: 'POST',
       headers: getHeaders(localStorage.getItem("token")),
-      body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: `https://api.nomoreparties.co/${movie.image.url}`,
-        trailerLink: movie.trailerLink,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
-        thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
-        movieId: movie.id,
-      })
+      body: JSON.stringify(movie)
     })
     .then(checkStatus);
   }

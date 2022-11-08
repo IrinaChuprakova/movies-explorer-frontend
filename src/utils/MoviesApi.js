@@ -13,6 +13,23 @@ export const getMovies = () => {
       else {
         return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
       }
+    })
+    .then((res) => {
+      return res.map(movie => {
+        return {
+          country: movie.country,
+          director: movie.director,
+          duration: movie.duration,
+          year: movie.year,
+          description: movie.description,
+          image: `https://api.nomoreparties.co/${movie.image.url}`,
+          trailerLink: movie.trailerLink,
+          nameRU: movie.nameRU,
+          nameEN: movie.nameEN,
+          thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+          movieId: movie.id,
+        };
+      });
     });
 }
 

@@ -6,15 +6,16 @@ function MoviesCardList(props) {
     const savedMovies = MovieStorage.getSavedMovies();
 
     function mapCards(card) {
-      const savedMovie = savedMovies.find(movie => movie.movieId === card.id);
+      const savedMovie = savedMovies.find(movie => movie.movieId === card.movieId);
       const isLiked = savedMovie ? true : false;
 
       return (
         <MoviesCard
           isLiked = {isLiked}
-          key={card.id || card.movieId}
+          key={card.movieId}
           card={card}
           onCardSave={props.onCardSave}
+          setCards={props.setCards}
         />)
     }
 

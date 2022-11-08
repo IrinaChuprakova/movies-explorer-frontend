@@ -5,6 +5,8 @@ import React from 'react';
 import * as MovieStorage from "../../utils/MovieStorage";
 
 function SavedMovies(props) {
+    const [cards, setCards] = React.useState(props.cards);
+
     return (
         <div className="movies">
             <SearchForm 
@@ -14,7 +16,8 @@ function SavedMovies(props) {
             checked={props.checked}
             />
         <MoviesCardList
-            cards={MovieStorage.getSavedMovies()}
+            cards={cards}
+            setCards={setCards}
         />
         </div>
 
@@ -22,5 +25,3 @@ function SavedMovies(props) {
 }
 
 export default SavedMovies;
-
-
