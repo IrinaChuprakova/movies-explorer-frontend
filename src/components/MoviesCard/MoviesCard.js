@@ -21,7 +21,6 @@ function MoviesCard(props) {
   function handleCardLike() {
     MainApi.createMovie(props.card)
       .then((res) => {
-      console.log('laik')
       MovieStorage.addSavedMovie(res.movie);
       setIsLiked(true)
       })
@@ -33,7 +32,6 @@ function MoviesCard(props) {
   function handleCardDelete() {
     MainApi.removeMovie(MovieStorage.getSavedMovies().find(movie => movie.movieId === props.card.movieId)._id)
     .then((res) => {
-     console.log('dislaik')
      MovieStorage.removeFromSavedMovies(props.card.movieId);
      setIsLiked(false)
      if (location.pathname === "/saved-movies") {

@@ -26,7 +26,8 @@ function App() {
   const [width, setWidth] = React.useState(window.innerWidth);
   const [more, setMore] = React.useState(0);
   const [checked, setChecked] = React.useState(false);
-
+  const [load, setLoad] = React.useState(false);
+  
   React.useEffect(() => {
     MainApi.getSavedMovies()
       .then(res => {
@@ -101,11 +102,13 @@ function App() {
   }
 
   function Search(movie) {
+    setLoad(true)
     MoviesApi.getMovies(movie)
       .then((res) => {
         const movies = res.filter((item) => item.nameRU.trim().toLowerCase().includes(movie.toLowerCase()));
         MovieStorage.setMovies(movies);
         resizeCards(checked);
+        setLoad(false)
       })
       .catch((error) => {
         console.log(error);
@@ -189,6 +192,7 @@ function App() {
           setCards={setCards}
           handleCheckbox={handleCheckbox}
           checked={checked}
+          load={load}
         />
 
         <ProtectedRoute

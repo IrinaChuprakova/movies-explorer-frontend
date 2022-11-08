@@ -9,10 +9,12 @@ function Movies(props){
             handleCheckbox={props.handleCheckbox}
             setCards={props.setCards}
             checked={props.checked}
+            
         />
         <MoviesCardList
             cards={props.cards}
             loadMore={props.loadMore}
+            load={props.load}
         />
         </div>
 

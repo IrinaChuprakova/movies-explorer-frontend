@@ -1,8 +1,12 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
-import * as MovieStorage from "../../utils/MovieStorage";
+import * as MovieStorage from '../../utils/MovieStorage';
+import Preloader from '../../components/Preloader/Preloader'
+import { useLocation } from "react-router-dom";
 
 function MoviesCardList(props) {
+  const location = useLocation();
+
     const savedMovies = MovieStorage.getSavedMovies();
 
     function mapCards(card) {
@@ -19,12 +23,25 @@ function MoviesCardList(props) {
         />)
     }
 
+    const isFull = props.cards.length === MovieStorage.getMovies().length;
+
+    
+
     return(
         <div className="cards">
+        {
+           (props.load) ? (<Preloader/>) : ('')
+        }
+        
         <ul className="cards__list">
         {props.cards.map(mapCards)}
         </ul>
-        <button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>
+        {
+          location.pathname === "/movies" 
+            ? (isFull ? (null) : (<button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>))
+            : (null)
+        }
+        
       </div>
     )
 }
