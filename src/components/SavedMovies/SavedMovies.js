@@ -2,7 +2,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import React from 'react';
-import * as MovieStorage from "../../utils/MovieStorage";
 
 function SavedMovies(props) {
     const [cards, setCards] = React.useState(props.cards);

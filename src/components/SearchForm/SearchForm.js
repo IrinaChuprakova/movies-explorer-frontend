@@ -36,9 +36,6 @@ function SearchForm(props){
         <span className="search-form__error">{error}</span>
         </div>
         </div>
-
-
-
     )
 }
 
