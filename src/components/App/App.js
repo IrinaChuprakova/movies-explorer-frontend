@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as MainApi from "../../utils/MainApi";
-import * as MoviesApi from "../../utils/MoviesApi";
 import * as MovieStorage from "../../utils/MovieStorage";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -22,11 +21,6 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [errorApi, setErrorApi] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [cards, setCards] = React.useState([]);
-  const [width, setWidth] = React.useState(window.innerWidth);
-  const [more, setMore] = React.useState(0);
-  const [checked, setChecked] = React.useState(false);
-  const [load, setLoad] = React.useState(false);
   
   React.useEffect(() => {
     MainApi.getSavedMovies()
@@ -47,15 +41,6 @@ function App() {
       })
       .catch((error) => console.log(error));
   }, []);
-
-  React.useEffect(() => {
-    window.addEventListener('resize', checkWidth);
-    resizeCards(checked);
-  }, [width])
-
-  function checkWidth(){
-    setWidth(window.innerWidth)
-  }
  
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
@@ -101,50 +86,6 @@ function App() {
       });
   }
 
-  function Search(movie) {
-    setLoad(true)
-    MoviesApi.getMovies(movie)
-      .then((res) => {
-        const movies = res.filter((item) => item.nameRU.trim().toLowerCase().includes(movie.toLowerCase()));
-        MovieStorage.setMovies(movies);
-        resizeCards(checked);
-        setLoad(false)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  function resizeCards(checked) {
-    const movies = checked
-        ? MovieStorage.getMovies().filter(item => item.duration <= 40)
-        : MovieStorage.getMovies();
-
-    if (width>768) {
-      setCards(movies.slice(0, 12));
-      setMore(4);
-      return;
-    }
-    
-    if (width<=768 && width>480) {
-      setCards(movies.slice(0, 8));
-      setMore(2);
-      return;
-    }
-
-    setCards(movies.slice(0, 5));
-    setMore(2);
-  }
-
-  function handleCheckbox(evt) {
-    setChecked(evt.target.checked);
-    resizeCards(evt.target.checked);
-  }
-
-  function loadMore() {
-    setCards(MovieStorage.getMovies().slice(0, cards.length + more));
-  }
-
   function tokenCheck() {
     const token = localStorage.getItem("token");
     if (token) {
@@ -186,20 +127,12 @@ function App() {
           path="/movies"
           loggedIn={loggedIn}
           component={Movies}
-          search={Search}
-          cards={cards}
-          loadMore={loadMore}
-          setCards={setCards}
-          handleCheckbox={handleCheckbox}
-          checked={checked}
-          load={load}
         />
 
         <ProtectedRoute
           path="/saved-movies"
           loggedIn={loggedIn}
           component={SavedMovies}
-          cards={MovieStorage.getSavedMovies()}
         />
 
         <ProtectedRoute
