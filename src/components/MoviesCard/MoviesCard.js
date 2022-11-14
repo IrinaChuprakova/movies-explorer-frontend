@@ -18,6 +18,7 @@ function MoviesCard(props) {
     return duration + 'м';
   }
 
+
   function handleCardLike() {
     MainApi.createMovie(props.card)
       .then((res) => {
@@ -25,7 +26,7 @@ function MoviesCard(props) {
       setIsLiked(true)
       })
       .catch((error) => {
-        console.log(error);
+        props.ExitOnError(error)
       });
   }
 
@@ -38,9 +39,10 @@ function MoviesCard(props) {
       props.setCards(MovieStorage.getSavedMovies());
      }
     })
-     .catch((error) => {
-       console.log(error);
-     });
+    .catch((error) => {
+      props.ExitOnError();
+      console.log(error);
+    });
   }
 
   return (

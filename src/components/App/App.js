@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as MainApi from "../../utils/MainApi";
-import * as MovieStorage from "../../utils/MovieStorage";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -19,16 +18,10 @@ function App() {
   const history = useHistory();
 
   const [currentUser, setCurrentUser] = React.useState({});
-  const [errorApi, setErrorApi] = React.useState("");
+  const [errorLogin, setErrorLogin] = React.useState("");
+  const [errorRegister, setErrorRegister] = React.useState("");
+  const [errorProfie, setErrorProfie] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
-  
-  React.useEffect(() => {
-    MainApi.getSavedMovies()
-      .then(res => {
-        MovieStorage.setSavedMovies(res.movie);
-      })
-      .catch(err => console.log(err));
-  }, []);
 
   React.useEffect(() => {
     tokenCheck();
@@ -46,11 +39,12 @@ function App() {
     MainApi.register(name, email, password)
       .then((res) => {
         if (res) {
+          setErrorRegister("");
           handleLogin(email, password);
         }
       })
       .catch((error) => {
-        setErrorApi("Что-то пошло не так...");
+        setErrorRegister("Что-то пошло не так...");
         console.log(error);
       });
   }
@@ -63,6 +57,7 @@ function App() {
           setLoggedIn(true);
           MainApi.getUserInfo()
             .then((profileInfo) => {
+              setErrorLogin("");
               setCurrentUser(profileInfo.user);
             })
             .catch((error) => console.log(error));
@@ -70,7 +65,7 @@ function App() {
         }
       })
       .catch((error) => {
-        setErrorApi("Что-то пошло не так...");
+        setErrorLogin("Что-то пошло не так...");
         console.log(error);
       });
   }
@@ -79,9 +74,11 @@ function App() {
     MainApi.updateUserInfo(name, email)
       .then((res) => {
         setCurrentUser(res.user);
+        setErrorProfie("");
+        alert('Изменения сохранены успешно!')
       })
       .catch((error) => {
-        setErrorApi("Что-то пошло не так...");
+        setErrorProfie("Что-то пошло не так...");
         console.log(error);
       });
   }
@@ -104,11 +101,21 @@ function App() {
   }
 
   function handleLogOut() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setLoggedIn(false);
     history.push("/signin");
-    localStorage.clear();
+    
   }
+
+  function ExitOnError(error)  {
+    if (error === "Ошибка: 401 Unauthorized") {
+      localStorage.clear();
+      setLoggedIn(false);
+      history.push("/");
+      return;
+    }
+    console.log(error);
+} 
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -127,12 +134,14 @@ function App() {
           path="/movies"
           loggedIn={loggedIn}
           component={Movies}
+          ExitOnError={ExitOnError}
         />
 
         <ProtectedRoute
           path="/saved-movies"
           loggedIn={loggedIn}
           component={SavedMovies}
+          ExitOnError={ExitOnError}
         />
 
         <ProtectedRoute
@@ -141,15 +150,15 @@ function App() {
           component={Profile}
           onLogOut={handleLogOut}
           onUpdate={handleUpdate}
-          errorApi={errorApi}
+          errorApi={errorProfie}
         />
 
         <Route path="/signin">
-          <Login onLogin={handleLogin} errorApi={errorApi} />
+          <Login onLogin={handleLogin} errorApi={errorLogin} />
         </Route>
 
         <Route path="/signup">
-          <Register onRegister={handleRegister} errorApi={errorApi} />
+          <Register onRegister={handleRegister} errorApi={errorRegister} />
         </Route>
 
         <Route path="*">

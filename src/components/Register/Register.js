@@ -21,7 +21,7 @@ function Register(props){
         <input className="register__input" type="text" placeholder="Ваше имя" name="name" value={values.name || ""} onChange={handleChange} pattern="[а-яА-ЯёЁa-zA-Z-\s]+" minLength="2" maxLength="30" required></input>
         <span className="register__error"> {errors.name} </span>
         <label className="register__label">E-mail</label>
-        <input className="register__input" type="email" placeholder="Ваше e-mail" name="email" value={values.email || ""} onChange={handleChange} required></input>
+        <input className="register__input" type="email" placeholder="Ваше e-mail" name="email" value={values.email || ""} onChange={handleChange} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></input>
         <span className="register__error"> {errors.email} </span>
         <label className="register__label">Пароль</label>
         <input className="register__input" type="password" placeholder="Придумайте пароль" name="password" value={values.password || ""} onChange={handleChange} minLength="2" maxLength="30" required></input>

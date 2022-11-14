@@ -3,7 +3,7 @@ import './SearchForm.css';
 import search from '../../images/search.svg';
 
 function SearchForm(props){
-    const [movie, setMovie] = React.useState('');
+    const [movie, setMovie] = React.useState(props.searchQuery);
     const [error, setError] = React.useState('');
 
     function handleMovie(evt) {
@@ -16,7 +16,7 @@ function SearchForm(props){
             setError('Нужно ввести ключевое слово');
             return
         }
-        setError('');
+        setError("");
         props.search(movie);
     }
 
@@ -25,7 +25,7 @@ function SearchForm(props){
         <div className="search-form__form-box">
         <form className="search-form__form" onSubmit={handleSubmit}>
         <img src={search} alt="Иконка поиска"/>
-        <input className="search-form__input" type="text" placeholder="Фильм" value={movie || ""} onChange={handleMovie}></input>
+        <input className="search-form__input" type="text" placeholder="Фильм" value={movie || "" } onChange={handleMovie}></input>
         <button className="search-form__btn" type="submit"></button>
         <div className="search-form-container">
         <span className="search-form__border"></span>

@@ -3,42 +3,76 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css'
 import * as MoviesApi from "../../utils/MoviesApi";
 import * as MovieStorage from "../../utils/MovieStorage";
+import * as MainApi from "../../utils/MainApi";
 import React from "react";
 
-function Movies() {
+function Movies(props) {
     const [width, setWidth] = React.useState(window.innerWidth);
     const [cards, setCards] = React.useState([]);
+    const [findedCards, setFindedCards] = React.useState([]);
     const [checked, setChecked] = React.useState(localStorage.getItem("movies_checked") === 'true');
     const [load, setLoad] = React.useState(false);
     const [more, setMore] = React.useState(0);
+    const [infoMessage, setInfoMessage] = React.useState(false);
+    const searchQuery = localStorage.getItem("searchQuery");
+
+    React.useEffect(() => {
+      if (searchQuery === "" || searchQuery === null || searchQuery === undefined) {
+        return;
+      }
+      search(searchQuery);
+    }, []);
 
     React.useEffect(() => {
         window.addEventListener('resize', checkWidth);
         resizeCards(checked);
     }, [width]);
+
+    React.useEffect(() => {
+      resizeCards(checked);
+    }, [findedCards]);
     
     function checkWidth() {
         setWidth(window.innerWidth)
     }
 
-    function search(movie) {
-        setLoad(true)
-        MoviesApi.getMovies(movie)
+    async function search(movie) {
+        localStorage.setItem("searchQuery", movie)
+
+        if (MovieStorage.getMovies().length === 0) {
+          setLoad(true);
+          await MoviesApi.getMovies(movie)
           .then((res) => {
-            const movies = res.filter((item) => item.nameRU.trim().toLowerCase().includes(movie.toLowerCase()));
-            MovieStorage.setMovies(movies);
-            resizeCards(checked);
+            MovieStorage.setMovies(res);
             setLoad(false)
           })
           .catch((error) => {
             console.log(error);
           });
+          if (MovieStorage.getSavedMovies().length === 0) {
+            await MainApi.getSavedMovies()
+              .then(res => {
+                MovieStorage.setSavedMovies(res.movie);
+              })
+              .catch(err => console.log(err));
+          }
+        }
+
+        const movies = MovieStorage
+          .getMovies()
+          .filter((item) => item.nameRU.trim().toLowerCase().includes(movie.toLowerCase()));
+        if (movies.length === 0 ) { 
+          setInfoMessage(true)
+        } else {
+          setInfoMessage(false)
+        }
+        setFindedCards(movies);
     }
 
     function resizeCards(checked) {
         const movies = checked
-            ? MovieStorage.getMovies().filter(item => item.duration <= 40)
-            : MovieStorage.getMovies();
+            ? findedCards.filter(item => item.duration <= 40)
+            : findedCards;
     
         if (width>768) {
           setCards(movies.slice(0, 12));
@@ -57,7 +91,7 @@ function Movies() {
       }
     
       function loadMore() {
-        setCards(MovieStorage.getMovies().slice(0, cards.length + more));
+        setCards(findedCards.slice(0, cards.length + more));
       }
     
       function handleCheckbox(evt) {
@@ -71,13 +105,15 @@ function Movies() {
         <SearchForm 
             search={search}
             handleCheckbox={handleCheckbox}
-            setCards={setCards}
             checked={checked}
+            searchQuery={searchQuery}
         />
         <MoviesCardList
             cards={cards}
             loadMore={loadMore}
             load={load}
+            infoMessage={infoMessage}
+            ExitOnError={props.ExitOnError}
         />
         </div>
     )
