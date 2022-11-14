@@ -78,8 +78,8 @@ function App() {
         alert('Изменения сохранены успешно!')
       })
       .catch((error) => {
+        ExitOnError(error);
         setErrorProfie("Что-то пошло не так...");
-        console.log(error);
       });
   }
 

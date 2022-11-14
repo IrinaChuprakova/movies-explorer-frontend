@@ -14,6 +14,7 @@ function Movies(props) {
     const [load, setLoad] = React.useState(false);
     const [more, setMore] = React.useState(0);
     const [infoMessage, setInfoMessage] = React.useState(false);
+    const [isFull, setIsFull] = React.useState(false);
     const searchQuery = localStorage.getItem("searchQuery");
 
     React.useEffect(() => {
@@ -77,16 +78,34 @@ function Movies(props) {
         if (width>768) {
           setCards(movies.slice(0, 12));
           setMore(4);
+          if (movies.length > 12) {
+            setIsFull(true)
+          }
+          else {
+            setIsFull(false)
+          }
           return;
         }
         
         if (width<=768 && width>480) {
           setCards(movies.slice(0, 8));
           setMore(2);
+          if (movies.length > 8) {
+            setIsFull(true)
+          }
+          else {
+            setIsFull(false)
+          }
           return;
         }
     
         setCards(movies.slice(0, 5));
+        if (movies.length > 5) {
+          setIsFull(true)
+        }
+        else {
+          setIsFull(false)
+        }
         setMore(2);
       }
     
@@ -114,6 +133,7 @@ function Movies(props) {
             load={load}
             infoMessage={infoMessage}
             ExitOnError={props.ExitOnError}
+            isFull={isFull}
         />
         </div>
     )

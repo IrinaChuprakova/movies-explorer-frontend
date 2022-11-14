@@ -40,8 +40,7 @@ function MoviesCard(props) {
      }
     })
     .catch((error) => {
-      props.ExitOnError();
-      console.log(error);
+      props.ExitOnError(error)
     });
   }
 

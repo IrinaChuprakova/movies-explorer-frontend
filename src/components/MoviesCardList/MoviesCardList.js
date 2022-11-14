@@ -24,7 +24,7 @@ function MoviesCardList(props) {
         />)
     }
 
-    const isFull = props.cards.length === MovieStorage.getMovies().length;
+    // const isFull = props.cards.length === MovieStorage.getMovies().length;
 
     return(
         <div className="cards">
@@ -40,7 +40,7 @@ function MoviesCardList(props) {
         </ul>
         {
           location.pathname === "/movies" 
-            ? (isFull ? (null) : (<button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>))
+            ? (props.isFull ? (<button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>): (null))
             : (null)
         }
         

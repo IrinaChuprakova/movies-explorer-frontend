@@ -30,7 +30,7 @@ function Profile(props){
         <form className="profile__form" onSubmit={handleSubmit}>
         <div className="profile__container">
         <label className="profile__label">Имя</label>
-        <input className="profile__input" disabled={show ?  true : false } type="text" name="name" value={values.name || ""} onChange={handleChange} pattern="[а-яА-ЯёЁa-zA-Z-\s]+" minLength="2" maxLength="30" required></input>
+        <input className="profile__input" disabled={show ?  true : false } type="text" name="name" value={values.name || "" } onChange={handleChange} pattern="[а-яА-ЯёЁa-zA-Z-\s]+" minLength="2" maxLength="30" required></input>
         </div>
         <span className="profile__error"> {errors.name} </span>
         <div className="profile__container">
