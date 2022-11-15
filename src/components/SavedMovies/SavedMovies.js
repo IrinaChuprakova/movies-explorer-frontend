@@ -9,6 +9,7 @@ function SavedMovies(props) {
     const [width, setWidth] = React.useState(window.innerWidth);
     const [cards, setCards] = React.useState([]);
     const [checked, setChecked] = React.useState(false);
+    const [searchQuery, setSearchQuery] = React.useState("");
 
     React.useEffect(() => {
         const movies = MovieStorage.getSavedMovies();
@@ -37,6 +38,11 @@ function SavedMovies(props) {
 
     function search(movieName) {
         resizeCards(checked, movieName);
+        setSearchQuery(movieName);
+    }
+
+    function updateCards() {
+        resizeCards(checked, searchQuery);
     }
 
     function resizeCards(checked, movieName) {
@@ -47,23 +53,13 @@ function SavedMovies(props) {
         if (movieName) {
             movies = movies.filter((item) => item.nameRU.trim().toLowerCase().includes(movieName.toLowerCase()))
         }
-    
-        if (width>768) {
-          setCards(movies.slice(0, 12));
-          return;
-        }
         
-        if (width<=768 && width>480) {
-          setCards(movies.slice(0, 8));
-          return;
-        }
-    
-        setCards(movies.slice(0, 5));
+        setCards(movies);
       }
 
     function handleCheckbox(evt) {
         setChecked(evt.target.checked);
-        resizeCards(evt.target.checked);
+        resizeCards(evt.target.checked, searchQuery);
     }
 
     return (
@@ -76,7 +72,7 @@ function SavedMovies(props) {
             />
         <MoviesCardList
             cards={cards}
-            setCards={setCards}
+            updateCards={updateCards}
             ExitOnError={props.ExitOnError}
         />
         </div>

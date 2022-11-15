@@ -115,15 +115,21 @@ function App() {
       return;
     }
     console.log(error);
-} 
+  }
+
+  function checkAuth() {
+    const token = localStorage.getItem("token");
+    if (token !== null && token !== "" && token !== undefined) {
+      history.push("/");
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      {location.pathname === "/signin" ||
-      location.pathname === "/signup" ||
-      location.pathname === "*" ? null : (
-        <Header loggedIn={loggedIn} />
-      )}
+      {location.pathname === "/movies" ||
+      location.pathname === "/saved-movies" ||
+      location.pathname === "/profile" ||
+      location.pathname === "/" ? <Header loggedIn={loggedIn} /> : (null)}
 
       <Switch>
         <Route exact path="/">
@@ -152,13 +158,13 @@ function App() {
           onUpdate={handleUpdate}
           errorApi={errorProfie}
         />
-
+  
         <Route path="/signin">
-          <Login onLogin={handleLogin} errorApi={errorLogin} />
+          <Login onLogin={handleLogin} errorApi={errorLogin} checkAuth={checkAuth} />
         </Route>
-
+        
         <Route path="/signup">
-          <Register onRegister={handleRegister} errorApi={errorRegister} />
+          <Register onRegister={handleRegister} errorApi={errorRegister} checkAuth={checkAuth} />
         </Route>
 
         <Route path="*">
@@ -166,12 +172,11 @@ function App() {
         </Route>
       </Switch>
 
-      {location.pathname === "/signin" ||
-      location.pathname === "/signup" ||
+      {location.pathname === "/movies" ||
+      location.pathname === "/saved-movies" ||
       location.pathname === "/profile" ||
-      location.pathname === "*" ? null : (
-        <Footer />
-      )}
+      location.pathname === "/" ? <Footer /> : (null)}
+      
     </CurrentUserContext.Provider>
   );
 }

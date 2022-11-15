@@ -75,7 +75,7 @@ function Movies(props) {
             ? findedCards.filter(item => item.duration <= 40)
             : findedCards;
     
-        if (width>768) {
+        if (width>=1280) {
           setCards(movies.slice(0, 12));
           setMore(4);
           if (movies.length > 12) {
@@ -86,8 +86,20 @@ function Movies(props) {
           }
           return;
         }
+
+        if (width>990 && width<1280) {
+          setCards(movies.slice(0, 12));
+          setMore(3);
+          if (movies.length > 12) {
+            setIsFull(true)
+          }
+          else {
+            setIsFull(false)
+          }
+          return;
+        }
         
-        if (width<=768 && width>480) {
+        if (width<990 && width>=640) {
           setCards(movies.slice(0, 8));
           setMore(2);
           if (movies.length > 8) {
@@ -110,7 +122,12 @@ function Movies(props) {
       }
     
       function loadMore() {
-        setCards(findedCards.slice(0, cards.length + more));
+        const newCards = findedCards.slice(0, cards.length + more);
+        if (newCards.length === findedCards.length) {
+          setIsFull(false)
+        }
+        setCards(newCards);
+        
       }
     
       function handleCheckbox(evt) {

@@ -19,12 +19,10 @@ function MoviesCardList(props) {
           key={card.movieId}
           card={card}
           onCardSave={props.onCardSave}
-          setCards={props.setCards}
+          updateCards={props.updateCards}
           ExitOnError={props.ExitOnError}
         />)
     }
-
-    // const isFull = props.cards.length === MovieStorage.getMovies().length;
 
     return(
         <div className="cards">

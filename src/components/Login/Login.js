@@ -5,8 +5,12 @@ import './Login.css';
 import Logo from '../Logo/Logo';
 
 function Login(props){
-
     const {values, handleChange, errors, isValid, resetForm} = FormValidate();
+    
+    React.useEffect(() => {
+        props.checkAuth();
+    }, []);
+    
     function handleSubmit(evt) {
         evt.preventDefault();
         if (!values.email || !values.password) {

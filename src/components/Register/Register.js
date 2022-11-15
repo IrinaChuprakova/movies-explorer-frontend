@@ -7,6 +7,10 @@ import  FormValidate from "../FormValidate/FormValidate";
 function Register(props){
     const {values, handleChange, errors, isValid, resetForm} = FormValidate();
 
+    React.useEffect(() => {
+        props.checkAuth();
+    }, [])
+
     function handleSubmit(evt) {
         evt.preventDefault();
         props.onRegister(values.name,values.email,values.password);
