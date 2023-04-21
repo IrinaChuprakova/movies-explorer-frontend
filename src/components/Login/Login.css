@@ -41,8 +41,16 @@
     color: #EE3465;
 
 }
+
+.login__error-api {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    color: #FF004C;
+}
+
 .login__btn{
-    background: #FF6838;
     border: none;
     border-radius: 3px;
     padding-top: 13px;
@@ -55,6 +63,16 @@
     margin-top: 69px;
     cursor: pointer;
 }
+
+.login__btn_valid{
+    background: #FF6838;
+}
+
+.login__btn_error-validation{
+    background: #F8F8F8;
+    color: #000;
+}
+
 .login__link{
     text-decoration: none;
     font-weight: 400;

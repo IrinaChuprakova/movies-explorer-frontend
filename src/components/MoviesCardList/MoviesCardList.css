@@ -26,7 +26,15 @@
     border: 1px solid #E8E8E8;
     border-radius: 5px;
     display: block;
+    cursor: pointer;
 }
+.infoMessage{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color:#EE3465;
+}
+
 
 @media screen and (max-width: 768px) {
     .cards {

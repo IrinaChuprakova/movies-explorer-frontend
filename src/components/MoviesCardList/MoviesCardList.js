@@ -1,18 +1,47 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
+import * as MovieStorage from '../../utils/MovieStorage';
+import Preloader from '../../components/Preloader/Preloader'
+import { useLocation } from "react-router-dom";
 
-function MoviesCardList(){
+function MoviesCardList(props) {
+  const location = useLocation();
+
+    const savedMovies = MovieStorage.getSavedMovies();
+
+    function mapCards(card) {
+      const savedMovie = savedMovies.find(movie => movie.movieId === card.movieId);
+      const isLiked = savedMovie ? true : false;
+
+      return (
+        <MoviesCard
+          isLiked = {isLiked}
+          key={card.movieId}
+          card={card}
+          onCardSave={props.onCardSave}
+          updateCards={props.updateCards}
+          ExitOnError={props.ExitOnError}
+        />)
+    }
+
     return(
         <div className="cards">
+        {
+           (props.load) ? (<Preloader/>) : ('')
+        }
+        {
+          (props.infoMessage) ? ( <p className="infoMessage">Ничего не найдено</p>) : ('')
+        }
+        
         <ul className="cards__list">
-          {/* {props.cards.map((film) => (
-            <MoviesCard
-              key={film._id}
-              film={film}
-            />))} */}
-            <MoviesCard/>
+        {props.cards.map(mapCards)}
         </ul>
-        <button className="cards__more" type="button">Ещё</button>
+        {
+          location.pathname === "/movies" 
+            ? (props.isFull ? (<button className="cards__more" type="button" onClick={props.loadMore}>Ещё</button>): (null))
+            : (null)
+        }
+        
       </div>
     )
 }
