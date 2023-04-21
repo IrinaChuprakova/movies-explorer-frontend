@@ -1,0 +1,132 @@
+.search-form {
+  padding: 70px 70px 0;
+  max-width: 1140px;
+  margin: auto;
+}
+
+.search-form__form {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  max-width: 1140px;
+  background: #f9f9f9ef;
+  border-radius: 9px;
+  padding: 19px;
+}
+
+.search-form__input {
+  border: none;
+  background-color: transparent;
+  width: calc(100% - 307px);
+  outline: none;
+  margin-left: 10px;
+}
+.search-form__input:focus {
+  border-bottom: 1px solid #d0ccccef;
+}
+
+.search-form__btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background-image: url('../../images/searchbtn.svg');
+  background-color: transparent;
+}
+
+.search-form__border {
+  height: 40px;
+  border-left: 1px solid #E8E8E8;
+  margin: 0 30px;
+}
+.search-form-container{
+  display: flex;
+  align-items: center;
+}
+
+.search-form__checkbox {
+  width: 36px;
+  height: 20px;
+  position: relative;
+  border-radius: 20px;
+  background-color: #E8E8E8;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  transition: 0.2s;
+}
+
+.search-form__checkbox:checked {
+  background-color: #2BE080;
+}
+
+.search-form__checkbox:after {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  content: '';
+  background-color: #F5F5F5;
+  position: absolute;
+  left: 2px;
+  top: 2px
+}
+
+.search-form__checkbox:checked::after {
+  left: 18px;
+}
+
+.search-form__text {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  margin-left: 14px;
+}
+
+.search-form__form-box {
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 69px;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    padding: 80px 30px 70px;
+  }
+
+  .search-form__border {
+    margin: 0 19px;
+  }
+
+  .search-form__text {
+    margin-left: 15px;
+  }
+
+  .search-form__input {
+    width: calc(100% - 287px);
+  }
+
+  .search-form__form-box {
+    padding-bottom: 109px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .search-form__form{
+    justify-content: center;
+  }
+  .search-form {
+    padding: 80px 10px 50px;
+  }
+  .search-form__border {
+    display: none;
+  }
+  .search-form__input {
+    width: calc(100% - 80px);
+  }
+  .search-form__form-box {
+    position: relative;
+  }
+  .search-form-container{
+    position: absolute;
+    top:112px
+  }
+
+}
