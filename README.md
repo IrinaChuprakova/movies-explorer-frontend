@@ -22,7 +22,7 @@ Grid
 Webpack
 
 ### Установка и запуск проекта:
-Клонировать репозиторий: https://github.com/IrinaChuprakova/movies-explorer-frontend.git
+Клонировать репозиторий: https://github.com/IrinaChuprakova/movies-explorer-frontend.git  
 Установить зависимости: npm install  
-Запустить сервер: npm run start  (сервер: https://github.com/IrinaChuprakova/movies-explorer-api)
+Запустить сервер: npm run start  (сервер: https://github.com/IrinaChuprakova/movies-explorer-api)  
 Запустить сервер с hot-reload: npm run dev  
